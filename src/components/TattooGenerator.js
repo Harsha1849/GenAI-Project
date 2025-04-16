@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import './TattooGenerator.css';
 
 export default function TattooGenerator() {
@@ -144,7 +145,13 @@ export default function TattooGenerator() {
             <div className="image-grid">
                 {images.map((img, i) => (
                     <div key={i} className="image-card">
-                        <img src={img} alt={`Tattoo ${i + 1}`} />
+                        <Image 
+                            src={img} 
+                            alt={`Tattoo ${i + 1}`} 
+                            width={300} 
+                            height={300} 
+                            layout="responsive"
+                        />
                         <div className="image-actions">
                             <button onClick={() => downloadImage(img, i)}>Download</button>
                             <button className="preview-btn" onClick={() => openPreview(img)}>Preview</button>
@@ -158,7 +165,13 @@ export default function TattooGenerator() {
                 <div className="preview-modal-overlay" onClick={closePreview}>
                     <div className="preview-modal-content" onClick={(e) => e.stopPropagation()}>
                         <div className="preview-image-container">
-                            <img src={previewImage} alt="Tattoo Preview" />
+                            <Image 
+                                src={previewImage} 
+                                alt="Tattoo Preview" 
+                                width={600} 
+                                height={600} 
+                                layout="responsive"
+                            />
                         </div>
                         <div className="preview-controls">
                             <button className="close-preview" onClick={closePreview}>Close Preview</button>
@@ -180,7 +193,13 @@ export default function TattooGenerator() {
                 <div className="marquee-track">
                     {["/samples/sample1.webp", "/samples/sample2.webp", "/samples/sample3.webp", "/samples/sample4.webp", "/samples/sample5.webp", "/samples/sample6.jpg", "/samples/sample1.webp", "/samples/sample2.webp", "/samples/sample3.webp", "/samples/sample4.webp", "/samples/sample5.webp", "/samples/sample6.jpg"].map((img, i) => (
                         <div key={i} className="image-card">
-                            <img src={img} alt={`Sample ${i + 1}`} />
+                            <Image 
+                                src={img} 
+                                alt={`Sample ${i + 1}`} 
+                                width={300} 
+                                height={300} 
+                                layout="responsive"
+                            />
                         </div>
                     ))}
                 </div>
@@ -219,7 +238,7 @@ export default function TattooGenerator() {
                                 <li>Wash gently with antibacterial soap</li>
                                 <li>Apply recommended aftercare products</li>
                                 <li>Avoid swimming, direct sunlight, and heavy workouts for 2 weeks</li>
-                                <li>Don't pick at scabs as they form and heal</li>
+                                <li>Don&apos;t pick at scabs as they form and heal</li>
                             </ul>
                         </div>
                         
