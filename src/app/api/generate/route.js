@@ -1,10 +1,9 @@
-// FILE: app/api/generate/route.js
 export async function POST(req) {
     try {
         const { prompt } = await req.json();
-        
-        // Using a smaller model that generates faster
-        const response = await fetch("https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5", {
+
+        // Using a supported text-to-image model
+        const response = await fetch("https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0", {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${process.env.HF_API_KEY}`,
@@ -13,12 +12,9 @@ export async function POST(req) {
             body: JSON.stringify({ 
                 inputs: prompt,
                 options: {
-                    use_cache: true,     // Use cached results when available
-                    wait_for_model: true // Still wait for model but using a faster model
+                    wait_for_model: true
                 }
-            }),
-            // Set a longer timeout for the fetch request
-            signal: AbortSignal.timeout(25000) // 25 second timeout
+            })
         });
 
         const contentType = response.headers.get("content-type");
